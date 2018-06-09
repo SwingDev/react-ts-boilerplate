@@ -16,7 +16,7 @@
   "scripts": {
     "start": "webpack-dev-server --config ./webpack/webpack.dev.js",
     "start:analyzer": "cross-env ANALYZER=true yarn start",
-    "build": "yarn clean && yarn proto && webpack --config ./webpack/webpack.prod.js --progress -p",
+    "build": "cross-env NODE_ENV=production yarn clean && webpack --config ./webpack/webpack.prod.js --progress -p",
     "test": "jest --maxWorkers=4",
     "test:debug": "jest --verbose --runInBand --no-cache",
     "test:watch": "jest --verbose --watchAll",
@@ -25,7 +25,8 @@
     "tslint": "tslint --project tsconfig.json --config tslint.json",
     "tslint:fix": "tslint --project tsconfig.json --config tslint.json --fix",
     "stylelint": "stylelint \"src/**/*.scss\"",
-    "stylelint:fix": "stylelint \"src/**/*.scss\" --fix"
+    "stylelint:fix": "stylelint \"src/**/*.scss\" --fix",
+    "setup": "node ./internals/setup.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.46",
@@ -53,6 +54,7 @@
     "babel-core": "^7.0.0-0",
     "babel-jest": "^23.0.1",
     "babel-loader": "^8.0.0-beta",
+    "chalk": "^2.4.1",
     "circular-dependency-plugin": "^5.0.2",
     "copy-webpack-plugin": "^4.3.0",
     "cross-env": "^5.1.4",
