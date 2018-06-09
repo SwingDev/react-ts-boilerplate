@@ -67,27 +67,38 @@ function installDependencies() {
 }
 
 function deleteInternals(directory, callback) {
+  process.stdout.write('Deleting internals');
   rimraf(directory, callback);
 }
 
 function handleDepsInstall(error) {
-  process.stdout.write('\n\n');
+  process.stdout.write('\n');
 
   handleError(error)
 
-  deleteInternals('./internals', () => {
-    if (clearRepo) {
-      process.stdout.write('Initialising new repository');
-      initGit();
-    }
+  deleteInternals('./internals', (error) => {
+    handleError(error);
 
-    process.stdout.write('\nDone!');
-    process.exit(0);
+    addCheckMark();
+
+    if (clearRepo) {
+      process.stdout.write('\nInitialising new repository');
+      initGit(() => {
+        process.stdout.write('\nDone!');
+        process.exit(0);
+      });
+    } else {
+      process.stdout.write('\nDone!');
+      process.exit(0);
+    }
   });
 }
 
 function initGit(callback) {
-  exec('git init && git add . && git commit -m "Initial commit"', () => addCheckMark(callback));
+  exec('git init && git add -A && git commit -m "Initial commit"', (error) => {
+    handleError(error);
+    addCheckMark(callback);
+  });
 }
 
 function handleError(error) {
