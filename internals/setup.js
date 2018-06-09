@@ -6,6 +6,7 @@
 
 const rimraf = require('rimraf');
 const exec = require('child_process').exec;
+const fs = require('fs');
 
 const { addCheckMark } = require('./helpers');
 
@@ -25,7 +26,7 @@ function cleanRepo(callback) {
     if (!err) {
       const isClonedRepo = typeof data === 'string'
         && (data.match(/url\s*=/g) || []).length === 1
-        && /react-ts-boilerplate\/react-ts-boilerplate\.git/.test(data);
+        && /SwingDev\/react-ts-boilerplate\.git/.test(data);
 
       if (isClonedRepo) {
         process.stdout.write('\nDo you want to clear old repository? [Y/n] ');
@@ -34,7 +35,7 @@ function cleanRepo(callback) {
           const val = data.toString().trim();
           if (val === 'y' || val === 'Y' || val === '') {
             process.stdout.write('Removing old repository');
-            rimraf('.git/');
+            rimraf('.git/', handleError);
             addCheckMark(callback);
           } else {
             dontClearRepo('', callback);
@@ -58,25 +59,21 @@ function dontClearRepo(nl, callback) {
 function installDependencies() {
   exec('yarn --version', function (err, stdout, stderr) {
     if (parseFloat(stdout) < 0.15 || err || process.env.USE_YARN === 'false') {
-      exec('npm install', () => addCheckMark.bind(null, handleDepsInstall));
+      exec('npm install', addCheckMark.bind(null, handleDepsInstall));
     } else {
-      exec('yarn install', () => addCheckMark.bind(null, handleDepsInstall));
+      exec('yarn install', addCheckMark.bind(null, handleDepsInstall));
     }
   });
 }
 
-function deleteInternals(directory) {
+function deleteInternals(directory, callback) {
   rimraf(directory, callback);
 }
 
-function handleDepsInstall() {
+function handleDepsInstall(error) {
   process.stdout.write('\n\n');
 
-  if (error) {
-    process.stderr.write(error);
-    process.stdout.write('\n');
-    process.exit(1);
-  }
+  handleError(error)
 
   deleteInternals('./internals', () => {
     if (clearRepo) {
@@ -91,4 +88,12 @@ function handleDepsInstall() {
 
 function initGit(callback) {
   exec('git init && git add . && git commit -m "Initial commit"', () => addCheckMark(callback));
+}
+
+function handleError(error) {
+  if (error) {
+    process.stderr.write(error);
+    process.stdout.write('\n');
+    process.exit(1);
+  }
 }
