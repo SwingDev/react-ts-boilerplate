@@ -1,0 +1,15 @@
+version: '2'
+services:
+  app:
+    restart: unless-stopped
+    build:
+      context: ./{{name}}
+    command: yarn start
+    ports:
+      - "127.0.0.1:80:8080"
+    volumes:
+      - "./{{name}}/src:/app/src"
+      - "./{{name}}/server:/app/server"
+      - "./{{name}}/package.json:/app/package.json"
+    environment:
+      API_CMD: yarn start
