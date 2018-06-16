@@ -2,12 +2,13 @@ import { Action } from 'redux';
 import actionCreatorFactory from 'typescript-fsa';
 
 export interface IUser {
+  id: string;
   firstName: string;
   lastName: string;
 }
 
 export interface IUserPayload {
-  user: IUser;
+  id: string;
 }
 
 export interface IFetchUserByIdAction extends Action {

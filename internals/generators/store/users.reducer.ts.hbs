@@ -1,13 +1,11 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 
-import { com } from 'generated/protos';
-
 import { FetchUserById, IUser } from './actions';
 
 export interface IAsync {
   isFetching?: boolean;
   isFetched?: boolean;
-  fetchingError?: IError | undefined
+  fetchingError?: {} | undefined
 }
 
 export interface IExtendedUser extends IUser, IAsync {}
