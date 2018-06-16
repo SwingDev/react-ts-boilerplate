@@ -75,7 +75,7 @@ function endProcess() {
   process.exit(0);
 }
 
-module.exports = () => {
+module.exports = (callback) => {
   cleanRepo(() => {
     deleteInternals('./internals', (error) => {
       handleError(error);
@@ -84,8 +84,12 @@ module.exports = () => {
 
       if (clearRepo) {
         process.stdout.write('\nInitialising new repository');
-        initGit(() => endProcess());
+        initGit(() => {
+          callback();
+          endProcess();
+        });
       } else {
+        callback();
         endProcess();
       }
     });

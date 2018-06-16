@@ -47,7 +47,7 @@ module.exports = {
     }, {
       type: 'add',
       path: '../README.md',
-      templateFile: './generators/entry/README.md.hbs',
+      templateFile: './generators/setup/README.md.hbs',
       force: true
     }];
 
@@ -55,11 +55,11 @@ module.exports = {
       actions.push({
         type: 'add',
         path: '../Dockerfile',
-        templateFile: './generators/entry/Dockerfile.md.hbs',
+        templateFile: './generators/setup/Dockerfile.hbs',
       }, {
         type: 'add',
         path: '../docker-compose.template.yml',
-        templateFile: './generators/entry/docker-compose.template.yml.hbs',
+        templateFile: './generators/setup/docker-compose.template.yml.hbs',
       });
     }
 
@@ -68,9 +68,9 @@ module.exports = {
     }
 
     actions.push((() => {
-      setupProject();
-
-      return 'Setup project';
+      return new Promise((resolve) => {
+        setupProject(() => resolve('Setup project'));
+      });
     }));
 
     return actions;
