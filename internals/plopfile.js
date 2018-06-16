@@ -1,8 +1,5 @@
-const fs = require('fs');
-const path = require('path');
-
-const entryGenerator = require('./generators/entry');
+const setupGenerator = require('./generators/setup');
 
 module.exports = (plop) => {
-  plop.setGenerator('entry', entryGenerator);
+  plop.setGenerator('setup', setupGenerator);
 };

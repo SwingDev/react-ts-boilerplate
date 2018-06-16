@@ -1,5 +1,6 @@
 const lodash = require('lodash');
 
+const storeGenerator = require('../store');
 const setupProject = require('../../scripts/setup');
 
 const DEFAULTS = {
@@ -29,7 +30,9 @@ module.exports = {
     name: 'docker',
     default: true,
     message: 'Do you want to add Docker config files?',
-  }],
+  },
+    ...storeGenerator.prompts
+  ],
   actions: (data) => {
     const actions = [{
       type: 'modify',
@@ -58,6 +61,10 @@ module.exports = {
         path: '../docker-compose.template.yml',
         templateFile: './generators/entry/docker-compose.template.yml.hbs',
       });
+    }
+
+    if (storeGenerator.actions) {
+      actions.push(...storeGenerator.actions(data));
     }
 
     actions.push((() => {
