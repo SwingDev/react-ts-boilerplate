@@ -8,18 +8,12 @@ const rimraf = require('rimraf');
 const exec = require('child_process').exec;
 const fs = require('fs');
 
-const { addCheckMark } = require('./helpers');
+const { addCheckMark } = require('../helpers');
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
 let clearRepo = true;
-
-cleanRepo(() => {
-  process.stdout.write('\nInstalling dependencies... (This might take a while)');
-
-  installDependencies();
-});
 
 function cleanRepo(callback) {
   fs.readFile('.git/config', 'utf8', (err, data) => {
@@ -56,41 +50,9 @@ function dontClearRepo(nl, callback) {
   addCheckMark(callback);
 }
 
-function installDependencies() {
-  exec('yarn --version', function (err, stdout, stderr) {
-    if (parseFloat(stdout) < 0.15 || err || process.env.USE_YARN === 'false') {
-      exec('npm install', addCheckMark.bind(null, handleDepsInstall));
-    } else {
-      exec('yarn install', addCheckMark.bind(null, handleDepsInstall));
-    }
-  });
-}
-
 function deleteInternals(directory, callback) {
-  process.stdout.write('Deleting internals');
+  process.stdout.write('\nDeleting internals');
   rimraf(directory, callback);
-}
-
-function handleDepsInstall(error) {
-  process.stdout.write('\n');
-
-  handleError(error);
-
-  initGenerators(() => {
-    deleteInternals('./internals', (error) => {
-      handleError(error);
-
-      addCheckMark();
-
-      if (clearRepo) {
-        process.stdout.write('\nInitialising new repository');
-        initGit(() => endProcess());
-      } else {
-        endProcess();
-      }
-    });
-  });
-
 }
 
 function initGit(callback) {
@@ -108,16 +70,24 @@ function handleError(error) {
   }
 }
 
-function initGenerators(callback) {
-  process.stdout.write('\nCreating setup for your project');
-
-  exec('./node_modules/.bin/plop "entry" --plopfile internals/generators/plopfile.js', (error) => {
-    handleError(error);
-    addCheckMark(callback);
-  });
-}
-
 function endProcess() {
   process.stdout.write('\nDone!');
   process.exit(0);
 }
+
+module.exports = () => {
+  cleanRepo(() => {
+    deleteInternals('./internals', (error) => {
+      handleError(error);
+
+      addCheckMark();
+
+      if (clearRepo) {
+        process.stdout.write('\nInitialising new repository');
+        initGit(() => endProcess());
+      } else {
+        endProcess();
+      }
+    });
+  });
+};

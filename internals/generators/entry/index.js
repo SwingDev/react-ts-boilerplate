@@ -1,9 +1,11 @@
 const lodash = require('lodash');
 
+const setupProject = require('../../scripts/setup');
+
 const DEFAULTS = {
   title: 'New Project',
   description: 'Awesome project in TypeScript and React'
-}
+};
 
 module.exports = {
   description: 'Basic informations of your project',
@@ -24,7 +26,7 @@ module.exports = {
     default: lodash.kebabCase(DEFAULTS.title)
   }],
   actions: () => {
-    return [{
+    const actions = [{
       type: 'modify',
       path: '../package.json',
       pattern: /react\-ts\-boilerplate/g,
@@ -40,5 +42,13 @@ module.exports = {
       templateFile: './generators/entry/README.md.hbs',
       force: true
     }];
+
+    actions.push((() => {
+      setupProject();
+
+      return 'Setup project';
+    }));
+
+    return actions;
   }
 }
