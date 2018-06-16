@@ -1,7 +1,7 @@
 {
   "name": "react-ts-boilerplate",
   "version": "1.0.0",
-  "private": true,
+  "description": "An extensible and highly scalable boilerplate for React with TypeScript",
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.5",
@@ -76,6 +76,7 @@
     "jest": "^23.0.1",
     "modernizr-webpack-plugin": "^1.0.7",
     "node-sass": "^4.7.2",
+    "plop": "^2.0.0",
     "postcss-cssnext": "^3.0.2",
     "postcss-loader": "^2.0.9",
     "protobufjs": "^6.8.6",
@@ -83,6 +84,7 @@
     "react-test-renderer": "^16.2.0",
     "redux-logger": "3.0.6",
     "resolve-url-loader": "^2.2.1",
+    "rimraf": "^2.6.2",
     "sass-loader": "^7.0.1",
     "sinon": "^5.0.3",
     "source-map-loader": "^0.2.3",

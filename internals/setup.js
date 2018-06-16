@@ -74,24 +74,23 @@ function deleteInternals(directory, callback) {
 function handleDepsInstall(error) {
   process.stdout.write('\n');
 
-  handleError(error)
+  handleError(error);
 
-  deleteInternals('./internals', (error) => {
-    handleError(error);
+  initGenerators(() => {
+    deleteInternals('./internals', (error) => {
+      handleError(error);
 
-    addCheckMark();
+      addCheckMark();
 
-    if (clearRepo) {
-      process.stdout.write('\nInitialising new repository');
-      initGit(() => {
-        process.stdout.write('\nDone!');
-        process.exit(0);
-      });
-    } else {
-      process.stdout.write('\nDone!');
-      process.exit(0);
-    }
+      if (clearRepo) {
+        process.stdout.write('\nInitialising new repository');
+        initGit(() => endProcess());
+      } else {
+        endProcess();
+      }
+    });
   });
+
 }
 
 function initGit(callback) {
@@ -107,4 +106,18 @@ function handleError(error) {
     process.stdout.write('\n');
     process.exit(1);
   }
+}
+
+function initGenerators(callback) {
+  process.stdout.write('\nCreating setup for your project');
+
+  exec('./node_modules/.bin/plop "entry" --plopfile internals/generators/plopfile.js', (error) => {
+    handleError(error);
+    addCheckMark(callback);
+  });
+}
+
+function endProcess() {
+  process.stdout.write('\nDone!');
+  process.exit(0);
 }
