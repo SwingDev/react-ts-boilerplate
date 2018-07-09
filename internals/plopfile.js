@@ -1,5 +1,5 @@
-const setupGenerator = require('./generators/setup');
+const componentGenerator = require('./generators/component');
 
 module.exports = (plop) => {
-  plop.setGenerator('setup', setupGenerator);
+  plop.setGenerator('component', componentGenerator);
 };

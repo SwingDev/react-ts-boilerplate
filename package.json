@@ -29,7 +29,8 @@
     "tslint:fix": "tslint --project tsconfig.json --config tslint.json --fix",
     "stylelint": "stylelint \"src/**/*.scss\"",
     "stylelint:fix": "stylelint \"src/**/*.scss\" --fix",
-    "setup": "yarn install && ./node_modules/.bin/plop 'setup' --plopfile internals/plopfile.js"
+    "setup": "yarn install && ./node_modules/.bin/plop 'setup' --plopfile internals/plopfile-setup.js",
+    "generate": "./node_modules/.bin/plop --plopfile internals/plopfile.js"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.46",
