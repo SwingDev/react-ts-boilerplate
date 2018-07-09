@@ -3,11 +3,8 @@ const fs = require('fs')
 const merge = require('webpack-merge')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const ImageminPlugin = require('imagemin-webpack-plugin').default
-const imageminJpegoptim = require('imagemin-jpegoptim')
 
 const base = require('./webpack.base')
-const APP_DIR = path.resolve(__dirname, '..', 'src')
 const BUILD_DIR = path.resolve(__dirname, '..', 'dist')
 
 const extractStyles = new ExtractTextPlugin({
@@ -84,21 +81,6 @@ module.exports = merge(base, {
     extractStyles,
     new ManifestPlugin({
       fileName: path.resolve(__dirname, '..', 'dist', 'rev-manifest.json')
-    }),
-    new ImageminPlugin({
-      optipng: null,
-      jpegtran: null,
-      gifsicle: null,
-      pngquant: {
-        speed: 2
-      },
-      svgo: null,
-      plugins: [
-        imageminJpegoptim({
-          max: 85,
-          progressive: true
-        })
-      ]
     }),
     function () {
       this.plugin('done', (stats) => {
