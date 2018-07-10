@@ -29,7 +29,7 @@ module.exports = {
     when: (data) => data.isConnected
   }, {
     type: 'confirm',
-    name: 'addStyles',
+    name: 'hasStyles',
     default: true,
     message: 'Do you want styles?',
   }, {
@@ -43,16 +43,16 @@ module.exports = {
       {
         type: 'add',
         path: '../src/views/{{dashCase name}}/index.tsx',
-        templateFile: './view/class.tsx.hbs',
+        templateFile: './generators/view/class.tsx.hbs',
         abortOnFail: true,
       },
     ];
 
-    if (data.addStyles) {
+    if (data.hasStyles) {
       actions.push({
         type: 'add',
         path: '../src/views/{{dashCase name}}/styles.scss',
-        templateFile: './view/styles.scss.hbs',
+        templateFile: './generators/view/styles.scss.hbs',
         abortOnFail: true
       });
     }

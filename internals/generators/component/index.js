@@ -8,10 +8,10 @@ const TYPE = {
 const getTemplate = (type) => {
   switch (type) {
     case TYPE.stateless:
-      return './component/stateless.tsx.hbs'
+      return './generators/component/stateless.tsx.hbs'
 
     default:
-      return './component/class.tsx.hbs'
+      return './generators/component/class.tsx.hbs'
   }
 }
 
@@ -42,7 +42,7 @@ module.exports = {
     },
   }, {
     type: 'confirm',
-    name: 'addStyles',
+    name: 'hasStyles',
     default: true,
     message: 'Do you want styles?',
   }],
@@ -58,11 +58,11 @@ module.exports = {
       },
     ];
 
-    if (data.addStyles) {
+    if (data.hasStyles) {
       actions.push({
         type: 'add',
         path: '../src/components/{{properCase name}}/styles.scss',
-        templateFile: './component/styles.scss.hbs',
+        templateFile: './generators/component/styles.scss.hbs',
         abortOnFail: true
       });
     }

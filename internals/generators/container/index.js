@@ -23,7 +23,7 @@ module.exports = {
     message: 'Do you want to add state map function?',
   }, {
     type: 'confirm',
-    name: 'addStyles',
+    name: 'hasStyles',
     default: true,
     message: 'Do you want styles?',
   }],
@@ -32,16 +32,16 @@ module.exports = {
       {
         type: 'add',
         path: '../src/containers/{{properCase name}}/index.tsx',
-        templateFile: './container/class.tsx.hbs',
+        templateFile: './generators/container/class.tsx.hbs',
         abortOnFail: true,
       },
     ];
 
-    if (data.addStyles) {
+    if (data.hasStyles) {
       actions.push({
         type: 'add',
         path: '../src/containers/{{properCase name}}/styles.scss',
-        templateFile: './container/styles.scss.hbs',
+        templateFile: './generators/container/styles.scss.hbs',
         abortOnFail: true
       });
     }

@@ -62,9 +62,9 @@ const mapStateToProps = (state: RootState): StateFromProps => ({});
 const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchFromProps => ({});
 
 {{#if hasStateMap}}
-export default connect(mapStateToProps, mapDispatchToProps)({{properCase name}});
+export default connect(mapStateToProps, mapDispatchToProps)({{properCase name}}View);
 {{else}}
-export default connect(null, mapDispatchToProps)({{properCase name}});
+export default connect(null, mapDispatchToProps)({{properCase name}}View);
 {{/if}}
 {{else}}
 export default {{properCase name}}View;
