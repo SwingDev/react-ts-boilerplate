@@ -8,10 +8,10 @@ const TYPE = {
 const getTemplate = (type) => {
   switch (type) {
     case TYPE.stateless:
-      return './component/stateless.js.hbs'
+      return './component/stateless.tsx.hbs'
 
     default:
-      return './component/class.js.hbs'
+      return './component/class.tsx.hbs'
   }
 }
 
