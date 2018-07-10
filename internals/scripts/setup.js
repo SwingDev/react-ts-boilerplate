@@ -50,11 +50,6 @@ function dontClearRepo(nl, callback) {
   addCheckMark(callback);
 }
 
-function deleteInternals(directory, callback) {
-  process.stdout.write('\nDeleting internals');
-  rimraf(directory, callback);
-}
-
 function initGit(callback) {
   exec('git init && git add -A && git commit -m "Initial commit"', (error) => {
     handleError(error);
@@ -77,21 +72,17 @@ function endProcess() {
 
 module.exports = (callback) => {
   cleanRepo(() => {
-    deleteInternals('./internals', (error) => {
-      handleError(error);
+    addCheckMark();
 
-      addCheckMark();
-
-      if (clearRepo) {
-        process.stdout.write('\nInitialising new repository');
-        initGit(() => {
-          callback();
-          endProcess();
-        });
-      } else {
+    if (clearRepo) {
+      process.stdout.write('\nInitialising new repository');
+      initGit(() => {
         callback();
         endProcess();
-      }
-    });
+      });
+    } else {
+      callback();
+      endProcess();
+    }
   });
 };
