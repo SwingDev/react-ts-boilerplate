@@ -34,14 +34,20 @@ Single run
 Watch mode (re-run tests on file change)
 * run `yarn test:watch`
 
-Linting
-* run `yarn lint` (lints scripts and styles)
-
 ## Build
 
 * run `yarn build`
 
 Bundled files are in `./dist` directory
+
+---
+
+## Useful commands
+
+* `yarn lint` - lint scripts and styles
+* `yarn start:analyze` - starts the app with [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
+* `yarn generate <name>` - generates boilerplate code (available generators: **view**, **component**, **container**)
+* `yarn clean` - cleans `./dist` directory
 
 ---
 
