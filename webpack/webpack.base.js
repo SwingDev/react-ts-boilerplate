@@ -102,7 +102,7 @@ module.exports = {
       'feature-detects': [
         'touchevents'
       ],
-      filename: 'modernizr.[hash]',
+      filename: 'modernizr[hash]',
       noChunk: true,
       htmlWebpackPlugin: true
     })
