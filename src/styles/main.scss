@@ -1,12 +1,7 @@
-// *** Styles ***
-@import './base/fonts';
-@import './base/settings';
-@import './base/colors';
-
-@import './utils/easings';
-@import './utils/animations';
-@import './utils/grid';
-@import './utils/ui';
+/*
+  Note: This file should contain all imports to the files with classes and rules that should be
+  added as globals.
+*/
 
 @import './base/core';
 @import './base/typography';
