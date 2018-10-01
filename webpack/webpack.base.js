@@ -74,6 +74,7 @@ module.exports = {
       styles: path.resolve('./src/styles'),
       fonts: path.resolve('./src/fonts'),
       components: path.resolve('./src/components'),
+      containers: path.resolve('./src/containers'),
       views: path.resolve('./src/views'),
       utils: path.resolve('./src/utils'),
       root: path.resolve('./src')
