@@ -60,6 +60,7 @@ Base directory of source code is `./src` folder. Only this path is processed by 
 ├── components // dumb components
 ├── fonts // local fonts
 ├── images // images processed by Webpack
+├── typings // custom typings you use in your projects
 ├── public // files here are not processed
 ├── styles // base styles
 ├── utils // directory for helpers and utils
@@ -70,7 +71,17 @@ Base directory of source code is `./src` folder. Only this path is processed by 
 └── routes.ts // file with routes configuration
 ```
 
+## Bonus
+
+If you want to import `.svg` images you have two options:
+
+`import ImageUrl from './image.svg` - common way, will return an url
+
+`import ImageComponent from './image.svg?inline` - JSX way.
+`?inline` will return React `StatelessComponent`, so that you can use it like `<ImageComponent />` in your code.
+
 [react]: https://reactjs.org/
+[svgr]: https://github.com/smooth-code/svgr
 [typescript]: https://www.typescriptlang.org/
 [tslint]: https://palantir.github.io/tslint/
 [stylelint]: https://github.com/stylelint/stylelint

@@ -39,15 +39,12 @@ module.exports = {
         test: /\.svg$/i,
         oneOf: [{
           resourceQuery: /inline/,
-          use: [
-            'babel-loader',
-            {
-              loader: 'svgr/webpack',
-              options: {
-                title: false
-              }
+          use: [{
+            loader: '@svgr/webpack',
+            options: {
+              title: false
             }
-          ]
+          }]
         }, {
           use: 'file-loader?hash=sha512&digest=hex&name=[hash].[ext]'
         }]

@@ -5,8 +5,6 @@ const CircularDependencyPlugin = require('circular-dependency-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-const APP_DIR = path.resolve(__dirname, '..', 'src')
-
 const base = require('./webpack.base')
 
 if (process.env.ANALYZER) {
@@ -76,7 +74,7 @@ module.exports = merge(base, {
   },
   plugins: [
     new CircularDependencyPlugin({
-      exclude: /a\.js|node_modules/,
+      exclude: /\.js|node_modules/,
       failOnError: true
     }),
     new webpack.NamedModulesPlugin(),
