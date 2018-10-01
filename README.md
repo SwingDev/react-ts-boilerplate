@@ -78,7 +78,7 @@ If you want to import `.svg` images you have two options:
 `import ImageUrl from './image.svg` - common way, will return an url
 
 `import ImageComponent from './image.svg?inline` - JSX way.
-`?inline` will return React `StatelessComponent`, so that you can use it like `<ImageComponent/>` in your code.
+`?inline` will return React `StatelessComponent`, so that you can use it like `<ImageComponent />` in your code.
 
 [react]: https://reactjs.org/
 [svgr]: https://github.com/smooth-code/svgr
