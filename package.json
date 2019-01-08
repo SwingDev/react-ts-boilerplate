@@ -20,7 +20,7 @@
   "scripts": {
     "start": "webpack-dev-server --config ./webpack/webpack.dev.js",
     "start:analyze": "cross-env ANALYZER=true yarn start",
-    "build": "cross-env NODE_ENV=production yarn clean && webpack --config ./webpack/webpack.prod.js --progress -p",
+    "build": "yarn clean && cross-env NODE_ENV=production webpack --config ./webpack/webpack.prod.js --progress -p",
     "test": "jest --maxWorkers=4",
     "test:debug": "jest --verbose --runInBand --no-cache",
     "test:watch": "jest --verbose --watchAll",
