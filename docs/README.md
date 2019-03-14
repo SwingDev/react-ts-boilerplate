@@ -2,10 +2,9 @@
 
 # Documentation
 
-## Table of contents
+## Table of Contents
 
 - [Overview](overview)
-  - [Introduction](overview/introduction.md)
   - [Commands](overview/commands.md)
   - [Structure](overview/structure.md)
   - [FAQ](overview/faq.md)
